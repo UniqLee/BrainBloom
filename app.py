@@ -29,3 +29,9 @@ def generate_content():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+#  curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAP05RYwa__zILpmycarX_UlM_HlA25gYQ" -H 'Content-Type: application/json' -X POST -d '{
+#   "contents": [{
+#     "parts":[{"text": "Explain how AI works"}]
+#     }]
+#    }'
