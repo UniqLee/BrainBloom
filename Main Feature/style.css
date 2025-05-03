@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'Jua';
+    src: url('fonts/jua.woff2') format('woff2'),
+         url('fonts/jua.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Marko One';
+    src: url('fonts/marko-one.woff2') format('woff2'),
+         url('fonts/marko-one.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Martel';
+    src: url('fonts/martel.woff2') format('woff2'),
+         url('fonts/martel.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  :root {
+    --font-family-jua: 'Jua', sans-serif;
+    --font-family-marko-one: 'Marko One', sans-serif;
+    --font-family-martel: 'Martel', sans-serif;
+  }
+  
+  body {
+    font-family: var(--font-family-marko-one);
+  }
+  
+  .container {
+    max-width: 600px;
+  }
+  
+  .card {
+    border-radius: 20px;
+  }
+  
+  .btn-dark {
+    border-radius: 10px;
+  }

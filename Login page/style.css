@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'Marko One';
+    src: url('fonts/marko-one.woff2') format('woff2'),
+         url('fonts/marko-one.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  :root {
+    --font-family-marko-one: 'Marko One', sans-serif;
+  }
+  
+  body {
+    font-family: var(--font-family-marko-one);
+  }
+  
+  .container {
+    max-width: 400px;
+  }
+  
+  .card {
+    border-radius: 15px;
+  }
+  
+  .btn-primary {
+    border-radius: 8px;
+  }
