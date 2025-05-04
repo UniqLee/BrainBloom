@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'Ranchers';
+    src: url('fonts/ranchers.woff2') format('woff2'),
+         url('fonts/ranchers.woff') format('woff');
+  }
+  
+  @font-face {
+    font-family: 'Marko One';
+    src: url('fonts/marko-one.woff2') format('woff2'),
+         url('fonts/marko-one.woff') format('woff');
+  }
+  
+  @font-face {
+    font-family: 'Rufina';
+    src: url('fonts/rufina.woff2') format('woff2'),
+         url('fonts/rufina.woff') format('woff');
+  }
+  
+  @font-face {
+    font-family: 'Jua';
+    src: url('fonts/jua.woff2') format('woff2'),
+         url('fonts/jua.woff') format('woff');
+  }
+  
+  :root {
+    --font-family-ranchers: 'Ranchers', sans-serif;
+    --font-family-marko-one: 'Marko One', sans-serif;
+    --font-family-rufina: 'Rufina', sans-serif;
+    --font-family-jua: 'Jua', sans-serif;
+  }
+  
+  body {
+    font-family: var(--font-family-marko-one);
+  }
+  
+  .container {
+    max-width: 600px;
+  }
+  
+  .card {
+    border-radius: 20px;
+  }
+  
+  .btn {
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 20px;
+  }
