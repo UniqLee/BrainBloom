@@ -4,7 +4,7 @@ from google import genai
 
 app = Flask(__name__)
 
-
+# testing
 client = genai.Client(api_key="AIzaSyAP05RYwa__zILpmycarX_UlM_HlA25gYQ")
 
 @app.route('/generate', methods=['POST'])
