@@ -1,11 +1,17 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 from google import genai
 
 
 app = Flask(__name__)
+CORS(app)
 
 # testing
 client = genai.Client(api_key="AIzaSyAP05RYwa__zILpmycarX_UlM_HlA25gYQ")
+@app.route("/")
+def home_page():
+    return render_template("Welcome.html")
+    
 
 @app.route('/generate', methods=['POST'])
 def generate_content():
@@ -15,16 +21,16 @@ def generate_content():
     """
     data = request.get_json()
     if not data or 'prompt' not in data:
-        return "Missing 'prompt' in request body", 400
+        return jsonify({"error":"Missing 'prompt' in request body"}), 400
 
     prompt = data['prompt']
     try:
         response = client.models.generate_content(
             model="gemini-2.0-flash", contents=prompt
         )
-        return response.text, 200
+        return jsonify({"response":response.text}), 200
     except Exception as e:
-        return str(e), 500
+        return jsonify({"error":str(e)}), 500
 
 
 if __name__ == '__main__':
