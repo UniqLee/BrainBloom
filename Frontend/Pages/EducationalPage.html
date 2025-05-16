@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrainBloom - Select Education Level</title>
+
+  <!-- CSS Links -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../templates/typography.css">
+  <link rel="stylesheet" href="../templates/forms.css">
+  <link rel="stylesheet" href="../templates/buttons.css">
+</head>
+<body>
+
+  <div class="container education-container">
+    <h2>Select Your Educational Level</h2>
+
+    <form action="features.html" method="POST">
+      <div class="input-group">
+        <label for="educationLevel">Education Level</label>
+        <select id="educationLevel" name="educationLevel" required>
+          <option value="high_school">High School</option>
+          <option value="undergraduate">Undergraduate</option>
+          <option value="honors">Honors</option>
+          <option value="masters">Masters</option>
+        </select>
+      </div>
+
+      <h3>What is your main goal?</h3>
+      <div class="goal-options">
+        <input type="checkbox" id="exam_prep" name="goal[]" value="exam_prep">
+        <label for="exam_prep">Exam Preparation</label><br>
+
+        <input type="checkbox" id="self_learning" name="goal[]" value="self_learning">
+        <label for="self_learning">Self Learning</label><br>
+
+        <input type="checkbox" id="grade_improvement" name="goal[]" value="grade_improvement">
+        <label for="grade_improvement">Grade Improvement</label><br>
+
+        <input type="checkbox" id="conceptual_understanding" name="goal[]" value="conceptual_understanding">
+        <label for="conceptual_understanding">Conceptual Understanding</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Continue</button>
+    </form>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="../js/script.js"></script>
+</body>
+</html>

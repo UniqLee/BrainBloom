@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Python: Flask",
+        "type": "python",
+        "request": "launch",
+        "module": "flask",
+        "env": {
+          "FLASK_APP": "app.py",
+          "FLASK_DEBUG": "1"
+        },
+        "args": [
+          "run",
+          "--port",
+          "8080",
+          "--no-debugger"
+        ],
+        "jinja": true
+      },
+      {
+        "type": "chrome",
+        "request": "launch",
+        "name": "Launch Chrome against localhost",
+        "url": "http://localhost:8080",
+        "webRoot": "${workspaceFolder}"
+      }
+    ],
+    "compounds": [
+      {
+        "name": "Flask + Chrome",
+        "configurations": ["Python: Flask", "Launch Chrome against localhost"]
+      }
+    ]
+  }

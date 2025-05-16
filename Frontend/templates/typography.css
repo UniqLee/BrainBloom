@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'Martel';
+    src: url('../assets/fonts/martel.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Ranchers';
+    src: url('../assets/fonts/ranchers.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Marko One';
+    src: url('../assets/fonts/marko-one.ttf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Jua';
+    src: url('../assets/fonts/jua.ttf') format('truetype');
+  }
+  
+  /* Global typography */
+  body {
+    font-family: 'Marko One', sans-serif;
+    color: #333;
+  }
+  
+
+  .heading {
+    font-family: 'Ranchers', sans-serif;
+    font-size: 40px;
+  }
+  
+  .subheading {
+    font-family: 'Martel', sans-serif;
+    font-size: 24px;
+  }
+  
+  .paragraph {
+    font-family: 'Jua', sans-serif;
+    font-size: 18px;
+  }

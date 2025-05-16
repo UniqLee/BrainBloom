@@ -1,0 +1,63 @@
+@import url("../templates/buttons.css");
+@import url("../templates/forms.css");
+@import url("../templates/layout.css");
+@import url("../templates/typography.css");
+
+
+
+/* Global Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #E3F2FD;
+}
+
+/* Welcome Page Layout */
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Typography */
+.welcome-container h1 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.welcome-container p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Buttons */
+.buttons {
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.btn-primary {
+  background-color: #007BFF;
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: #6C757D;
+  color: #fff;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
