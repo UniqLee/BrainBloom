@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>BrainBloom</title>
-    </head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BrainBloom</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Welcome to <span>BrainBloom</span></h1>
+      <p>Your 24/7 AI tutor tailored just for you.</p>
+    </header>
 
-    <body>
-        <nav>
-            <ul>
-                <li><a href="/bloomie-ai">Talk to Bloomie</a></li>
-            </ul>
-        </nav>
-        <h1>Welcome to BrainBloom</h1>
-    </body>
+    <div class="actions">
+      <a href="#" class="btn primary">Get Started</a>
+      <p class="login-text">
+        Already have an account? <a href="#" class="login-link">Log in</a>
+      </p>
+    </div>
+  </div>
+</body>
 </html>
