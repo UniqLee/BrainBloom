@@ -51,6 +51,16 @@ def talk_to_bloomie():
         if response.status_code == 200:
             data = response.json()
             feedback = data.get("answer", "No feedback received.")
+            conn = get_db_connection()
+            conn = get_db_connection()
+            conn.execute(
+                "INSERT INTO topics (title, explanation, subject) VALUES (?, ?, ?)",
+                (prompt, feedback, "AI-generated")
+            )
+            conn.commit()
+            conn.close()
+
+
         else:
             feedback = "Error getting feedback from AI. Please try again later."
 
@@ -59,6 +69,78 @@ def talk_to_bloomie():
 
 
     return render_template("bloomie-ai.html", question=prompt, answer=feedback)
+
+
+@app.route("/topics")
+def view_topics():
+    conn = get_db_connection()
+    topics = conn.execute("SELECT * FROM topics ORDER BY created_at DESC").fetchall()
+    conn.close()
+    return render_template("topics.html", topics=topics)
+
+
+@app.route("/add-topic", methods=["GET", "POST"])
+def add_topic():
+    if request.method == "POST":
+        title = request.form["title"]
+        explanation = request.form["explanation"]
+        subject = request.form["subject"]
+
+        conn = get_db_connection()
+        conn.execute(
+            "INSERT INTO topics (title, explanation, subject) VALUES (?, ?, ?)",
+            (title, explanation, subject)
+        )
+        conn.commit()
+        conn.close()
+        flash("Topic added successfully!")
+        return redirect(url_for("view_topics"))
+
+    return render_template("add_topic.html")
+
+@app.route("/add-quiz", methods=["GET", "POST"])
+def add_quiz():
+    conn = get_db_connection()
+    topics = conn.execute("SELECT id, title FROM topics").fetchall()
+
+    if request.method == "POST":
+        topic_id = request.form["topic_id"]
+        question = request.form["question"]
+        correct_option = int(request.form["correct_option"])
+        options = [request.form[f"option{i}"] for i in range(4)]
+
+        cursor = conn.cursor()
+        cursor.execute(
+            "INSERT INTO quizzes (topic_id, question, correct_option) VALUES (?, ?, ?)",
+            (topic_id, question, correct_option)
+        )
+        quiz_id = cursor.lastrowid
+
+        for i, option in enumerate(options):
+            cursor.execute(
+                "INSERT INTO quiz_options (quiz_id, option_text, option_number) VALUES (?, ?, ?)",
+                (quiz_id, option, i)
+            )
+
+        conn.commit()
+        conn.close()
+        flash("Quiz added successfully!")
+        return redirect(url_for("view_quizzes"))
+
+    return render_template("add_quiz.html", topics=topics)
+
+
+@app.route("/quizzes")
+def view_quizzes():
+    conn = get_db_connection()
+    quizzes = conn.execute("""
+        SELECT quizzes.id, quizzes.question, quizzes.correct_option, topics.title AS topic_title
+        FROM quizzes
+        JOIN topics ON quizzes.topic_id = topics.id
+        ORDER BY quizzes.id DESC
+    """).fetchall()
+    conn.close()
+    return render_template("quizzes.html", quizzes=quizzes)
 
 
 if __name__ == '__main__':
