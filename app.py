@@ -33,7 +33,7 @@ def build_prompt(question):
 
     return context
 
-@app.route("/bloomie-ai", methods=["POST"])
+@app.route("/bloomie-ai", methods=["GET","POST"])
 def talk_to_bloomie():
     prompt = request.form.get("question")
     context = build_prompt(prompt)
@@ -57,7 +57,7 @@ def talk_to_bloomie():
     except Exception as e:
         feedback = f"An error occurred: {str(e)}"
 
-    # Send the prompt and feedback to the template
+
     return render_template("bloomie-ai.html", question=prompt, answer=feedback)
 
 
