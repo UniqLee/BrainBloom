@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, g, session, jsonify
 from flask_cors import CORS
+import sqlite3
 from dotenv import load_dotenv
 import os
+import requests
 
 
 load_dotenv() 
@@ -9,16 +11,12 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = 'your_secret_key' 
 
-<<<<<<< HEAD
 
 def get_db_connection():
     conn = sqlite3.connect('database/brainbloom.db')
     conn.row_factory = sqlite3.Row
     return conn
-# testing
-client = genai.Client(api_key="AIzaSyAP05RYwa__zILpmycarX_UlM_HlA25gYQ")
-=======
->>>>>>> f80d8e6e5fea0e47985c08fff7441005805ad670
+
 @app.route("/")
 def home():
     return render_template("index.html")
