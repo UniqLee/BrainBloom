@@ -1,11 +1,19 @@
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from google import genai
+import sqlite3
+
+
 
 
 app = Flask(__name__)
 CORS(app)
 
+
+def get_db_connection():
+    conn = sqlite3.connect('database/brainbloom.db')
+    conn.row_factory = sqlite3.Row
+    return conn
 # testing
 client = genai.Client(api_key="AIzaSyAP05RYwa__zILpmycarX_UlM_HlA25gYQ")
 @app.route("/")
