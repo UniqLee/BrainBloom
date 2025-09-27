@@ -1,0 +1,13 @@
+<h2>All Quizzes</h2>
+<ul>
+    {% for quiz in quizzes %}
+    <li>
+        <strong>{{ quiz['topic_title'] }}</strong>: {{ quiz['question'] }}  
+        (Correct: Option {{ quiz['correct_option'] }})<br>
+        <a href="/take-quiz/{{ quiz['id'] }}">Take Quiz</a>
+    </li>
+    {% endfor %}
+</ul>
+{% if not quizzes %}
+    <p>No quizzes available. <a href="/add-quiz">Add a new quiz</a>.</p>
+{% endif %}

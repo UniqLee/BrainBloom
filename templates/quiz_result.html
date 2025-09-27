@@ -1,0 +1,8 @@
+<h2>{{ result }}</h2>
+<p>Question: {{ quiz['question'] }}</p>
+<ul>
+    {% for option in options %}
+    <li>Option {{ option['option_number'] }}: {{ option['option_text'] }}</li>
+    {% endfor %}
+</ul>
+<a href="/quizzes">Back to Quizzes</a>
