@@ -1,0 +1,13 @@
+<h2>Saved Topics</h2>
+<ul>
+    {% for topic in topics %}
+    <li>
+        <strong>{{ topic['title'] }}</strong><br>
+        {{ topic['explanation'] }}<br>
+        <em>Subject: {{ topic['subject'] }}</em><br><br>
+    </li>
+    {% endfor %}
+</ul>
+{% if not topics %}
+    <p>No topics available. <a href="/add-topic">Add a new topic</a>.</p>
+{% endif %} 

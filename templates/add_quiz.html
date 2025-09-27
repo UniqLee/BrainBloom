@@ -1,0 +1,28 @@
+<h2>Add a Quiz</h2>
+<form method="POST">
+    <label>Topic:</label>
+    <select name="topic_id">
+        {% for topic in topics %}
+        <option value="{{ topic['id'] }}">{{ topic['title'] }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label>Question:</label><br>
+    <input type="text" name="question"><br><br>
+
+    {% for i in range(4) %}
+        <label>Option {{ i }}:</label><br>
+        <input type="text" name="option{{ i }}"><br><br>
+    {% endfor %}
+
+    <label>Correct Option (0–3):</label><br>
+    <input type="number" name="correct_option" min="0" max="3"><br><br>
+
+    <button type="submit">Add Quiz</button>
+</form>
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+{% if success %}
+    <p style="color: green;">{{ success }}</p>
+{% endif %}

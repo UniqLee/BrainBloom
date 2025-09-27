@@ -1,0 +1,19 @@
+<h2>Add a New Topic</h2>
+<form method="POST">
+    <label>Title:</label><br>
+    <input type="text" name="title"><br><br>
+
+    <label>Explanation:</label><br>
+    <textarea name="explanation"></textarea><br><br>
+
+    <label>Subject:</label><br>
+    <input type="text" name="subject"><br><br>
+
+    <button type="submit">Add Topic</button>
+</form>
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+{% if success %}
+    <p style="color: green;">{{ success }}</p>
+{% endif %}
