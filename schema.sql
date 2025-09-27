@@ -1,6 +1,6 @@
 -- Topics table
 CREATE TABLE topics (
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     explanation TEXT NOT NULL,
     subject TEXT,
