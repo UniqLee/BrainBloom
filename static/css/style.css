@@ -1,4 +1,5 @@
 body {
+  background-image: url('static/images/brainBloom.png');
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background-color: #e6f2ff;
@@ -9,6 +10,7 @@ body {
 }
 
 .container {
+  /* background-image: url(/static/images/images/brainBloom.png); */
   background-color:white;
   padding: 40px;
   border-radius: 12px;
