@@ -1,5 +1,5 @@
 body {
-  background-image: url('static/images/brainBloom.png');
+  background-image: url('/static/img/brainBloom.png');
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background-color: #e6f2ff;
