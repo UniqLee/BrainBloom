@@ -4,6 +4,7 @@ import sqlite3
 from dotenv import load_dotenv
 import os
 import requests
+import time
 
 
 load_dotenv() 
@@ -20,7 +21,7 @@ def get_db_connection():
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template('index.html', time=int(time.time()))
 
 def build_prompt(question):
     context=f"""You are personalized ai study assistant called Bloomie, you are meant to provide:  

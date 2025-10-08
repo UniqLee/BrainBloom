@@ -1,7 +1,9 @@
 body {
-  background-image: url('static/images/brainBloom.png');
+  background-image: url('../images/brainBloom.png');
+  background-repeat:no-repeat;
+  background-size:cover;
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Comic Relief', sans-serif;
   background-color: #e6f2ff;
   display: flex;
   justify-content: center;
