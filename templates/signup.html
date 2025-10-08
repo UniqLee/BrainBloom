@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+</head>
+<body>
+  <h2>Sign Up</h2>
+ <form action="/signup" method="POST">
+  <label for="first-name">First Name:</label>
+  <input type="text" id="first-name" name="first-name" required>
+
+  <label for="last-name">Last Name:</label>
+  <input type="text" id="last-name" name="last-name" required>
+
+  <label for="email">Email Address:</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required>
+
+   <label for="confirm-password">Confirm Password:</label>
+  <input type="password" id="confirm-password" name="confirm-password" required>
+
+  <label for="education">Education Level:</label>
+  <select id="education" name="education" required>
+    <option value="">-- Select --</option>
+    <option value="highschool">High School</option>
+    <option value="undergrad">Undergraduate</option>
+    <option value="postgrad">Postgraduate</option>
+    <option value="other">Other</option>
+  </select>
+
+  <label for="subjects">Subjects/Modules:</label>
+  <select id="subjects" name="subjects" required>
+    <option value="">-- Select --</option>
+    <option value="math">Mathematics</option>
+    <option value="science">Science</option>
+    <option value="history">History</option>
+    <option value="programming">Programming</option>
+    <option value="design">Design</option>
+  </select>
+
+  <label for="goal">What is your goal?</label>
+  <select id="goal" name="goal" required>
+    <option value="">-- Select --</option>
+    <option value="career">Advance my career</option>
+    <option value="skills">Learn new skills</option>
+    <option value="certification">Earn a certification</option>
+    <option value="project">Build a personal project</option>
+    <option value="other">Other</option>
+  </select>
+
+  <button type="submit">Create Account</button>
+</form>
+ <p>Already have an account? <a href="login.html"></a></p>
+</body>
+</html>

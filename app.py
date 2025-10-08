@@ -144,6 +144,15 @@ def view_quizzes():
     conn.close()
     return render_template("quizzes.html", quizzes=quizzes)
 
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
+
+@app.rout("/login")
+def login():
+    return render_template("login.html")
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
