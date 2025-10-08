@@ -148,7 +148,7 @@ def view_quizzes():
 def signup():
     return render_template("signup.html")
 
-@app.rout("/login")
+@app.route("/login")
 def login():
     return render_template("login.html")
 
