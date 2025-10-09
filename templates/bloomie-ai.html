@@ -2,12 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ask Bloomie</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='bloomie.css') }}">
+  <title>BrainBloom Tutor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bloomie.css') }}">
 </head>
 <body>
   <div class="container">
-    <h1 class="title">Ask Bloomie</h1>
+    <h1 class="title">BrainBloom Tutor</h1>
+
+    <div class="chat-window" id="chat-window">
+      {% for message in chat_history %}
+        <div class="chat-bubble {{ message.role }}">
+          {% if message.role == 'bloomie' %}
+            <img src="{{ url_for('static', filename='img/bloomie-avatar.png') }}" class="avatar bloomie-avatar" alt="Bloomie">
+          {% else %}
+            <div class="avatar user-avatar">{{ session.get('email', 'U')[0] | upper }}</div>
+          {% endif %}
+          <div class="bubble-text">{{ message.text }}</div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div id="typing-indicator" class="typing hidden">
+      Bloomie is thinking<span class="dots">...</span>
+    </div>
 
     <form method="POST" action="/bloomie-ai" class="chat-form">
       <input
@@ -15,20 +32,29 @@
         name="question"
         type="text"
         class="chat-input"
-        placeholder="Ask Bloomie anything..."
+        placeholder="Ask anything about your topic..."
         required
         autofocus
-        value="{{ question if question else '' }}"
       >
-      <button type="submit" class="chat-button">Ask</button>
+      <button type="submit" class="chat-button">Send</button>
     </form>
 
-    {% if answer %}
-      <div id="bloomie-response" class="response-box">
-        <h3 class="response-title">Bloomie says:</h3>
-        <p class="response-text">{{ answer }}</p>
-      </div>
-    {% endif %}
-    </div>
+    <form method="POST" action="{{ url_for('clear_chat') }}">
+      <button type="submit" class="clear-btn">Clear Chat</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.querySelector('.chat-form');
+    const typingIndicator = document.getElementById('typing-indicator');
+    const chatWindow = document.getElementById('chat-window');
+
+    form.addEventListener('submit', () => {
+      typingIndicator.classList.remove('hidden');
+      setTimeout(() => {
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+      }, 100);
+    });
+  </script>
 </body>
 </html>

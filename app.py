@@ -86,6 +86,15 @@ def build_prompt(question):
 
 @app.route("/bloomie-ai", methods=["GET", "POST"])
 def talk_to_bloomie():
+    chat_history = session.get("chat_history", [])
+
+    if not chat_history:
+        chat_history.append({
+            "role": "bloomie",
+            "text": "Hi there! 🌱 I'm Bloomie, your study buddy. Ask me anything about your topic!"
+        })
+        session["chat_history"] = chat_history
+
     if request.method == "POST":
         prompt = request.form.get("question")
         context = build_prompt(prompt)
@@ -112,16 +121,27 @@ def talk_to_bloomie():
                 conn.commit()
                 conn.close()
 
+                chat_history.append({"role": "user", "text": prompt})
+                chat_history.append({"role": "bloomie", "text": feedback})
+                session["chat_history"] = chat_history
+
             else:
                 feedback = "Error getting feedback from Bloomie. Please try again later."
+                chat_history.append({"role": "bloomie", "text": feedback})
 
         except Exception as e:
             feedback = f"An error occurred: {str(e)}"
+            chat_history.append({"role": "bloomie", "text": feedback})
 
-        return render_template("bloomie-ai.html", question=prompt, answer=feedback)
+        return render_template("bloomie-ai.html", chat_history=chat_history)
 
-    return render_template("bloomie-ai.html", question="", answer="")
+    return render_template("bloomie-ai.html", chat_history=chat_history)
 
+
+@app.route("/clear-chat", methods=["POST"])
+def clear_chat():
+    session.pop("chat_history", None)
+    return redirect(url_for("talk_to_bloomie"))
 
 
 @app.route("/topics")
