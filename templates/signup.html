@@ -7,9 +7,19 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
 </head>
 <body>
+  
   <div class="container">
+     {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+        <li class="flash {{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
     <h2>Sign Up</h2>
-    <form action="/signup" method="POST">
+    <form method="POST" action="/signup">
       <label for="first-name">First Name:</label>
       <input type="text" id="first-name" name="first-name" required>
 
