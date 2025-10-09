@@ -47,11 +47,11 @@ def signup():
 
         hashed_password = generate_password_hash(password)
 
-        success = add_user(first_name, last_name, email, hashed_password, education, subject, goal)
+        success = add_user(email,hashed_password, first_name,last_name, education, subject, goal)
 
         if success:
             flash('Account created successfully! Please login.', 'success')
-            return redirect(url_for('login'))
+            return redirect(url_for('quizzes'))
         else:
             flash('Email already exists. Please use a different one.', 'error')
 
@@ -66,7 +66,7 @@ def login():
         if user and user['password'] == password:  
             session['email'] = email  
             flash('Logged in successfully!', 'success')
-            return redirect(url_for('bloomie-ai'))
+            return redirect(url_for('quizzes'))
         else:
             flash("User does not exist!")
 
@@ -84,8 +84,8 @@ def build_prompt(question):
 
     return context
 
-@app.route("/bloomie-ai", methods=["GET","POST"])
-def talk_to_bloomie():
+@app.route("/bloomie_ai", methods=["GET","POST"])
+def bloomie_ai():
     prompt = request.form.get("question")
     context = build_prompt(prompt)
 
@@ -193,13 +193,13 @@ def view_quizzes():
     conn.close()
     return render_template("quizzes.html", quizzes=quizzes)
 
-def add_user(first_name, last_name, email, password_hash, education, subject, goal):
+def add_user(email, password_hash,first_name, last_name, education, subject, goal):
     try:
         conn = get_db_connection()
         conn.execute("""
-            INSERT INTO users (first_name, last_name, email, password_hash, education_level, subject, goal)
+            INSERT INTO users (email, user_password, first_name, last_name, education_level, subjects, goal)
             VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (first_name, last_name, email, password_hash, education, subject, goal))
+        """, (email,password_hash , first_name, last_name, education, subject, goal))
         conn.commit()
         conn.close()
         return True
