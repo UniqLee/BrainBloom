@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 import requests
 import time
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash,check_password_hash
 
 
 load_dotenv() 
@@ -63,7 +63,7 @@ def login():
         email = request.form.get("email")
         password= request.form.get("password")
         user = get_user(email)
-        if user and user['password'] == password:  
+        if user and check_password_hash(user['user_password'], password):  
             session['email'] = email  
             flash('Logged in successfully!', 'success')
             return redirect(url_for('quizzes'))
@@ -123,7 +123,7 @@ def bloomie_ai():
 
 
 @app.route("/topics")
-def view_topics():
+def topics():
     conn = get_db_connection()
     topics = conn.execute("SELECT * FROM topics ORDER BY created_at DESC").fetchall()
     conn.close()
@@ -182,7 +182,7 @@ def add_quiz():
 
 
 @app.route("/quizzes")
-def view_quizzes():
+def quizzes():
     conn = get_db_connection()
     quizzes = conn.execute("""
         SELECT quizzes.id, quizzes.question, quizzes.correct_option, topics.title AS topic_title
