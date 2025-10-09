@@ -3,27 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <title>Ask Bloomie</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bloomie.css') }}">
 </head>
 <body>
-  <h1>Ask Bloomie</h1>
+  <div class="container">
+    <h1 class="title">Ask Bloomie</h1>
 
-  <form method="POST" action="/bloomie-ai">
-    <input
-      id="question"
-      name="question"
-      type="text"
-      placeholder="Ask Bloomie anything..."
-      required
-      value="{{ question if question else '' }}"
-    >
-    <button type="submit">Ask</button>
-  </form>
+    <form method="POST" action="/bloomie-ai" class="chat-form">
+      <input
+        id="question"
+        name="question"
+        type="text"
+        class="chat-input"
+        placeholder="Ask Bloomie anything..."
+        required
+        value="{{ question if question else '' }}"
+      >
+      <button type="submit" class="chat-button">Ask</button>
+    </form>
 
-  {% if answer %}
-    <div id="bloomie-response">
-      <h3>Bloomie says:</h3>
-      <p>{{ answer }}</p>
-    </div>
-  {% endif %}
+    {% if answer %}
+      <div id="bloomie-response" class="response-box">
+        <h3 class="response-title">Bloomie says:</h3>
+        <p class="response-text">{{ answer }}</p>
+      </div>
+    {% endif %}
+  </div>
 </body>
 </html>

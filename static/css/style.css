@@ -1,5 +1,5 @@
 body {
-  background-image: url('../images/brainBloom.png');
+  background-image: url('../img/brainBloom.png');
   background-repeat:no-repeat;
   background-size:cover;
   margin: 0;
@@ -12,37 +12,43 @@ body {
 }
 
 .container {
-  /* background-image: url(/static/images/images/brainBloom.png); */
-  background-color:white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  max-width: 400px;
-  width: 90%;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 800px;           
+  padding: 80px;         
+  text-align: left;
+  font-size: 1.5rem;     
+   color: #003366;
 }
 
 header h1 {
   font-size: 2rem;
   margin-bottom: 10px;
-  color: #333;
+  color: white;
+  font-size: 3rem;
+  margin-left: auto;
+  font-size: 5rem;
 }
 
 header h1 span {
-  color: #0077cc;
+  color: #1E293B;
+  font-size: 6.5rem;
 }
 
 header p {
-  font-size: 1.1rem;
-  color: #555;
+  font-size: 2rem;
+  color: white;
   margin-bottom: 30px;
+  font-weight: bolder;
 }
 
 .actions .btn {
   display: inline-block;
   padding: 12px 24px;
-  background-color: #0077cc;
-  color: white;
+  background-color: white;
+  color: #1E293B;
   text-decoration: none;
   border-radius: 6px;
   font-weight: bold;
@@ -50,21 +56,24 @@ header p {
 }
 
 .actions .btn:hover {
-  background-color: #005fa3;
+  background-color: #1E293B;
+  color: white;
 }
 
 .login-text {
   margin-top: 20px;
   font-size: 0.95rem;
   color: #444;
+  font-size: 2rem;
+  font-weight: bolder;
 }
 
 .login-link {
-  color: #0077cc;
+  color: white;
   text-decoration: none;
   font-weight: bold;
 }
 
 .login-link:hover {
-  text-decoration: underline;
+  color: #1E293B;
 }
