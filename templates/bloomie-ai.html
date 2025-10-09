@@ -9,13 +9,13 @@
 </head>
 <body>
   <div class="container">
-    <h1 class="title">BrainBloom Tutor</h1>
+    <h1 class="title">Ask Bloomie</h1>
 
     <div class="chat-window" id="chat-window">
       {% for message in chat_history %}
         <div class="chat-bubble {{ message.role }}">
           {% if message.role == 'bloomie' %}
-            <img src="{{ url_for('static', filename='img/bloomie-avatar.png') }}" class="avatar bloomie-avatar" alt="Bloomie">
+            <img src="{{ url_for('static', filename='img/bloomie.jpg') }}" class="avatar bloomie-avatar" alt="Bloomie">
           {% else %}
             <div class="avatar user-avatar">{{ session.get('email', 'U')[0] | upper }}</div>
           {% endif %}
