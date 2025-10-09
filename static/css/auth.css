@@ -1,0 +1,107 @@
+:root {
+  --primary-color: #1E293B;
+  --accent-color: #0077cc;
+  --background-color: #f5faff;
+  --background-image: url("/static/img/signup-login.png");
+  --input-bg: #ffffff;
+  --input-border: #cccccc;
+  --text-color: #333333;
+  --link-color: #0077cc;
+  --error-color: #cc0000;
+
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-base: 1rem;
+  --font-size-heading: 2rem;
+
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+
+  --radius: 6px;
+}
+
+body {
+  background-image: var(--background-image);
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: var(--font-family);
+  color: var(--text-color);
+  margin: 0;
+  padding: var(--spacing-lg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 500px;
+  width: 100%;
+}
+
+form {
+  width: 100%;
+}
+
+h2 {
+  font-size: var(--font-size-heading);
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  font-weight: bold;
+}
+
+input,
+select {
+  width: 100%;
+  padding: var(--spacing-sm);
+  font-size: var(--font-size-base);
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius);
+  background-color: var(--input-bg);
+  box-sizing: border-box;
+}
+
+button {
+  margin-top: var(--spacing-lg);
+  width: 100%;
+  padding: var(--spacing-md);
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: var(--font-size-base);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--primary-color);
+}
+
+p {
+  margin-top: var(--spacing-md);
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
