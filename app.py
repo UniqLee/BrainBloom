@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 import requests
 import time
+from werkzeug.security import generate_password_hash
 
 
 load_dotenv() 
@@ -22,6 +23,54 @@ def get_db_connection():
 @app.route("/")
 def home():
     return render_template('index.html', time=int(time.time()))
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == 'POST':
+        first_name = request.form.get('first-name')
+        last_name = request.form.get('last-name')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm-password')
+        education = request.form.get('education')
+        subject = request.form.get('subjects')
+        goal = request.form.get('goal')
+
+        if password != confirm_password:
+            flash('Passwords do not match.', 'error')
+            return render_template('signup.html')
+
+        if len(password) < 8:
+            flash('Password must be at least 8 characters.', 'error')
+            return render_template('signup.html')
+
+
+        hashed_password = generate_password_hash(password)
+
+        success = add_user(first_name, last_name, email, hashed_password, education, subject, goal)
+
+        if success:
+            flash('Account created successfully! Please login.', 'success')
+            return redirect(url_for('login'))
+        else:
+            flash('Email already exists. Please use a different one.', 'error')
+
+    return render_template('signup.html')
+
+@app.route("/login", methods=["POST","GET"])
+def login():
+    if request.method=="POST":
+        email = request.form.get("email")
+        password= request.form.get("password")
+        user = get_user(email)
+        if user and user['password'] == password:  
+            session['email'] = email  
+            flash('Logged in successfully!', 'success')
+            return redirect(url_for('bloomie-ai'))
+        else:
+            flash("User does not exist!")
+
+    return render_template("login.html")
 
 def build_prompt(question):
     context=f"""You are personalized ai study assistant called Bloomie, you are meant to provide:  
@@ -146,14 +195,24 @@ def view_quizzes():
     conn.close()
     return render_template("quizzes.html", quizzes=quizzes)
 
-@app.route("/signup")
-def signup():
-    return render_template("signup.html")
+def add_user(first_name, last_name, email, password_hash, education, subject, goal):
+    try:
+        conn = get_db_connection()
+        conn.execute("""
+            INSERT INTO users (first_name, last_name, email, password_hash, education_level, subject, goal)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (first_name, last_name, email, password_hash, education, subject, goal))
+        conn.commit()
+        conn.close()
+        return True
+    except sqlite3.IntegrityError:
+        return False
 
-@app.route("/login")
-def login():
-    return render_template("login.html")
 
+def get_user(user_email):
+    conn = get_db_connection()
+    cursor = conn.execute('SELECT * FROM users WHERE email = ?', (user_email,))
+    return cursor.fetchone()
 
 
 if __name__ == '__main__':
