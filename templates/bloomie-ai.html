@@ -8,6 +8,16 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bloomie.css') }}">
 </head>
 <body>
+  <nav class="navbar">
+  <div class="nav-brand">BrainBloom</div>
+  <ul class="nav-links">
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+    <!-- <li><a href="{{ url_for('talk_to_bloomie') }}">Home</a></li> -->
+    <li><a href="{{ url_for('login') }}" class="btn btn-outline">Login</a></li>
+    <li><a href="{{ url_for('signup') }}" class="btn btn-filled">Sign Up</a></li>
+  </ul>
+</nav>
+
   <div class="container">
     <h1 class="title">Ask Bloomie</h1>
 
