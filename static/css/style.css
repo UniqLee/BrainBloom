@@ -59,6 +59,22 @@ header p {
   background-color: #1E293B;
   color: white;
 }
+.button-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.btn.bloomie {
+  background-color: #1E293B;
+  color: white;
+  /* border: 2px solid white; */
+}
+
+.btn.bloomie:hover {
+  background-color: white;
+  color: #1E293B;
+}
 
 .login-text {
   margin-top: 20px;

@@ -17,6 +17,7 @@
         class="chat-input"
         placeholder="Ask Bloomie anything..."
         required
+        autofocus
         value="{{ question if question else '' }}"
       >
       <button type="submit" class="chat-button">Ask</button>
@@ -28,6 +29,6 @@
         <p class="response-text">{{ answer }}</p>
       </div>
     {% endif %}
-  </div>
+    </div>
 </body>
 </html>

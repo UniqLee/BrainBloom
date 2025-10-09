@@ -35,42 +35,44 @@ def build_prompt(question):
 
     return context
 
-@app.route("/bloomie-ai", methods=["GET","POST"])
+@app.route("/bloomie-ai", methods=["GET", "POST"])
 def talk_to_bloomie():
-    prompt = request.form.get("question")
-    context = build_prompt(prompt)
+    if request.method == "POST":
+        prompt = request.form.get("question")
+        context = build_prompt(prompt)
 
-    api_url = "https://api.shecodes.io/ai/v1/generate"
-    api_key = os.getenv("SHECODES_API_KEY")
+        api_url = "https://api.shecodes.io/ai/v1/generate"
+        api_key = os.getenv("SHECODES_API_KEY")
 
-    try:
-        response = requests.get(api_url, params={
-            'prompt': prompt,
-            'context': context,
-            'key': api_key
-        }, timeout=30)
+        try:
+            response = requests.get(api_url, params={
+                'prompt': prompt,
+                'context': context,
+                'key': api_key
+            }, timeout=30)
 
-        if response.status_code == 200:
-            data = response.json()
-            feedback = data.get("answer", "No feedback received.")
-            conn = get_db_connection()
-            conn = get_db_connection()
-            conn.execute(
-                "INSERT INTO topics (title, explanation, subject) VALUES (?, ?, ?)",
-                (prompt, feedback, "AI-generated")
-            )
-            conn.commit()
-            conn.close()
+            if response.status_code == 200:
+                data = response.json()
+                feedback = data.get("answer", "No feedback received.")
 
+                conn = get_db_connection()
+                conn.execute(
+                    "INSERT INTO topics (title, explanation, subject) VALUES (?, ?, ?)",
+                    (prompt, feedback, "AI-generated")
+                )
+                conn.commit()
+                conn.close()
 
-        else:
-            feedback = "Error getting feedback from AI. Please try again later."
+            else:
+                feedback = "Error getting feedback from Bloomie. Please try again later."
 
-    except Exception as e:
-        feedback = f"An error occurred: {str(e)}"
+        except Exception as e:
+            feedback = f"An error occurred: {str(e)}"
 
+        return render_template("bloomie-ai.html", question=prompt, answer=feedback)
 
-    return render_template("bloomie-ai.html", question=prompt, answer=feedback)
+    return render_template("bloomie-ai.html", question="", answer="")
+
 
 
 @app.route("/topics")
