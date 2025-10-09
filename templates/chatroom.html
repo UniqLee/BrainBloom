@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BrainBloom Chatroom</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chatroom.css') }}">
+  <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>BrainBloom Peer Chatroom</h1>
+    <div id="chat-box" class="chat-box"></div>
+
+    <form id="chat-form">
+      <input type="text" id="chat-input" placeholder="Type a message..." required autocomplete="off">
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script>
+    const socket = io();
+    const form = document.getElementById('chat-form');
+    const input = document.getElementById('chat-input');
+    const chatBox = document.getElementById('chat-box');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const message = input.value;
+      socket.emit("send_message", {
+        message: message,
+        sender: "{{ email }}"
+      });
+      input.value = "";
+    });
+
+    socket.on("receive_message", (data) => {
+      const msgDiv = document.createElement('div');
+      msgDiv.classList.add('message');
+      msgDiv.innerHTML = `<strong>${data.sender}:</strong> ${data.message}`;
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+  </script>
+</body>
+</html>

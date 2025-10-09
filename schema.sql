@@ -50,3 +50,9 @@ CREATE TABLE quiz_options (
     FOREIGN KEY(quiz_id) REFERENCES quizzes(id)
 );
 
+CREATE TABLE chatroom_messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    sender TEXT NOT NULL,
+    message TEXT NOT NULL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+);

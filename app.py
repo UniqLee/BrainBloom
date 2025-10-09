@@ -6,6 +6,10 @@ import os
 import requests
 import time
 from werkzeug.security import generate_password_hash,check_password_hash
+from flask_socketio import SocketIO, emit
+import eventlet
+
+
 
 
 load_dotenv() 
@@ -13,7 +17,8 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = 'your_secret_key' 
 CORS(app)
-
+eventlet.monkey_patch()
+socketio = SocketIO(app)
 
 def get_db_connection():
     conn = sqlite3.connect('database/brainbloom.db')
@@ -66,7 +71,7 @@ def login():
         if user and check_password_hash(user['user_password'], password):  
             session['email'] = email  
             flash('Logged in successfully!', 'success')
-            return redirect(url_for('quizzes'))
+            return redirect(url_for('chatroom'))
         else:
             flash("User does not exist!")
 
@@ -213,7 +218,7 @@ def add_quiz():
 
 
 @app.route("/quizzes")
-def view_quizzes():
+def quizzes():
     user_id = get_user(session['email'])['id']
     conn = get_db_connection()
     quizzes = conn.execute("""
@@ -250,6 +255,35 @@ def get_user(user_email):
     cursor = conn.execute('SELECT * FROM users WHERE email = ?', (user_email,))
     return cursor.fetchone()
 
+@app.route("/chatroom")
+def chatroom():
+    if 'email' not in session:
+        flash("Please log in to access the chatroom.", "error")
+        return redirect(url_for("login"))
+
+    conn = get_db_connection()
+    messages = conn.execute("SELECT sender, message, timestamp FROM chatroom_messages ORDER BY timestamp ASC").fetchall()
+    conn.close()
+
+    return render_template("chatroom.html", email=session['email'], messages=messages)
+
+@socketio.on('send_message')
+def handle_message(data):
+    sender = data['sender']
+    message = data['message']
+
+    # Save to database
+    conn = get_db_connection()
+    conn.execute("INSERT INTO chatroom_messages (sender, message) VALUES (?, ?)", (sender, message))
+    conn.commit()
+    conn.close()
+
+    # Broadcast message to all clients
+    emit('receive_message', {
+        'sender': sender,
+        'message': message
+    }, broadcast=True)
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)
