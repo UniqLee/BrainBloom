@@ -12,10 +12,12 @@ CREATE TABLE users (
 -- Topics table
 CREATE TABLE topics (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
     title TEXT NOT NULL,
     explanation TEXT NOT NULL,
     subject TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
 -- Resources table
@@ -31,10 +33,12 @@ CREATE TABLE resources (
 -- Quizzes table
 CREATE TABLE quizzes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
     topic_id INTEGER,
     question TEXT NOT NULL,
     correct_option INTEGER,
-    FOREIGN KEY(topic_id) REFERENCES topics(id)
+    FOREIGN KEY(topic_id) REFERENCES topics(id),
+    FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
 -- Quiz options table
