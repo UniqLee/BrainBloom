@@ -137,7 +137,7 @@ requests
 
 python-dotenv
 
-🌐 Live Features Overview
+## 🌐 Live Features Overview
 Signup Form:
 Collects user’s first name, last name, email, password, education level, subjects of interest, and learning goals.
 
@@ -150,14 +150,14 @@ Visual feedback on signup, login, and errors using Flask’s flash() and custom 
 Chatroom (WIP or Implemented):
 Peer-to-peer communication for deeper collaboration.
 
-🛡 Security Notes
+## 🛡 Security Notes
 Passwords are never stored as plain text; they are hashed using Werkzeug’s generate_password_hash().
 
 User sessions are handled securely with Flask session management.
 
 Inputs are sanitized via HTML forms and server-side validation.
 
-📬 Contact & Contributions
+## 📬 Contact & Contributions
 If you want to contribute, report issues, or collaborate, feel free to:
 
 Submit a pull request
@@ -166,10 +166,10 @@ Open an issue
 
 Contact us via GitHub
 
-📄 License
+## 📄 License
 This project is licensed under the MIT License.
 
-🙏 Acknowledgements
+## 🙏 Acknowledgements
 Thanks to SheCodes AI API for enabling smart learning with Bloomie.
 
 Inspired by educators and learners who believe in making learning more accessible, engaging, and interactive.
