@@ -51,7 +51,7 @@ def signup():
 
         if success:
             flash('Account created successfully! Please login.', 'success')
-            return redirect(url_for('quizzes'))
+            return redirect(url_for('login'))
         else:
             flash('Email already exists. Please use a different one.', 'error')
 
@@ -193,17 +193,22 @@ def view_quizzes():
     conn.close()
     return render_template("quizzes.html", quizzes=quizzes)
 
-def add_user(email, password_hash,first_name, last_name, education, subject, goal):
+def add_user(email, password_hash, first_name, last_name, education, subject, goal):
     try:
         conn = get_db_connection()
         conn.execute("""
             INSERT INTO users (email, user_password, first_name, last_name, education_level, subjects, goal)
             VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (email,password_hash , first_name, last_name, education, subject, goal))
+        """, (email, password_hash, first_name, last_name, education, subject, goal))
         conn.commit()
         conn.close()
+        print("User added successfully!")  # ✅ DEBUG LOG
         return True
     except sqlite3.IntegrityError:
+        print("IntegrityError: Email already exists!")  # ✅ DEBUG LOG
+        return False
+    except Exception as e:
+        print(f"Exception in add_user: {e}")  # ✅ DEBUG LOG
         return False
 
 
