@@ -105,3 +105,18 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.flashes {
+  list-style: none;
+  padding: 0;
+  margin-bottom: var(--spacing-md);
+}
+
+.flash {
+  padding: var(--spacing-sm);
+  background-color: var(--error-color); 
+  color: white;
+  border-radius: var(--radius);
+  font-weight: bold;
+  text-align: center;
+}
