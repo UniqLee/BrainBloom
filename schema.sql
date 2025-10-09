@@ -1,3 +1,14 @@
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT UNIQUE NOT NULL,
+    user_password TEXT NOT NULL,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    education_level TEXT NOT NULL,
+    subjects TEXT NOT NULL,
+    goal TEXT NOT NULL
+);
+
 -- Topics table
 CREATE TABLE topics (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,3 +45,4 @@ CREATE TABLE quiz_options (
     option_number INTEGER CHECK(option_number BETWEEN 0 AND 3),
     FOREIGN KEY(quiz_id) REFERENCES quizzes(id)
 );
+
