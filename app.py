@@ -145,12 +145,12 @@ def clear_chat():
 
 
 @app.route("/topics")
-def topics():
+def view_topics():
+    user_id = get_user(session['email'])['id']
     conn = get_db_connection()
-    topics = conn.execute("SELECT * FROM topics ORDER BY created_at DESC").fetchall()
+    topics = conn.execute("SELECT * FROM topics WHERE user_id = ? ORDER BY created_at DESC", (user_id,)).fetchall()
     conn.close()
     return render_template("topics.html", topics=topics)
-
 
 @app.route("/add-topic", methods=["GET", "POST"])
 def add_topic():
@@ -158,11 +158,13 @@ def add_topic():
         title = request.form["title"]
         explanation = request.form["explanation"]
         subject = request.form["subject"]
+        user = get_user(session['email'])
+        user_id = user['id']
 
         conn = get_db_connection()
         conn.execute(
-            "INSERT INTO topics (title, explanation, subject) VALUES (?, ?, ?)",
-            (title, explanation, subject)
+            "INSERT INTO topics (user_id, title, explanation, subject) VALUES (?, ?, ?, ?)",
+            (user_id, title, explanation, subject)
         )
         conn.commit()
         conn.close()
@@ -174,18 +176,25 @@ def add_topic():
 @app.route("/add-quiz", methods=["GET", "POST"])
 def add_quiz():
     conn = get_db_connection()
-    topics = conn.execute("SELECT id, title FROM topics").fetchall()
+    topics = conn.execute("SELECT id, title FROM topics WHERE user_id = ?", (get_user(session['email'])['id'],)).fetchall()
 
     if request.method == "POST":
         topic_id = request.form["topic_id"]
         question = request.form["question"]
-        correct_option = int(request.form["correct_option"])
+        correct_option_raw = request.form["correct_option"]
+        user_id = get_user(session['email'])['id']
+
+        if not correct_option_raw.isdigit():
+            flash("Please select a valid correct option.", "error")
+            return render_template("add_quiz.html", topics=topics)
+
+        correct_option = int(correct_option_raw)
         options = [request.form[f"option{i}"] for i in range(4)]
 
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO quizzes (topic_id, question, correct_option) VALUES (?, ?, ?)",
-            (topic_id, question, correct_option)
+            "INSERT INTO quizzes (user_id, topic_id, question, correct_option) VALUES (?, ?, ?, ?)",
+            (user_id, topic_id, question, correct_option)
         )
         quiz_id = cursor.lastrowid
 
@@ -204,14 +213,16 @@ def add_quiz():
 
 
 @app.route("/quizzes")
-def quizzes():
+def view_quizzes():
+    user_id = get_user(session['email'])['id']
     conn = get_db_connection()
     quizzes = conn.execute("""
         SELECT quizzes.id, quizzes.question, quizzes.correct_option, topics.title AS topic_title
         FROM quizzes
         JOIN topics ON quizzes.topic_id = topics.id
+        WHERE quizzes.user_id = ?
         ORDER BY quizzes.id DESC
-    """).fetchall()
+    """, (user_id,)).fetchall()
     conn.close()
     return render_template("quizzes.html", quizzes=quizzes)
 
