@@ -50,7 +50,6 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Brand Section */
 .nav-brand {
   display: flex;
   align-items: center;
@@ -68,7 +67,6 @@ body {
   color: var(--white);
 }
 
-/* Navigation Links */
 .nav-links {
   display: flex;
   gap: 32px;
@@ -92,6 +90,7 @@ body {
 .nav-cta-buttons {
   display: flex;
   gap: 12px;
+  margin-right: 20px;
 }
 
 .btn {
