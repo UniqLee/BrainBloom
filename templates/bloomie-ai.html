@@ -9,14 +9,23 @@
 </head>
 <body>
   <nav class="navbar">
-  <div class="nav-brand">BrainBloom</div>
-  <ul class="nav-links">
-    <li><a href="{{ url_for('home') }}">Home</a></li>
-    <!-- <li><a href="{{ url_for('talk_to_bloomie') }}">Home</a></li> -->
-    <li><a href="{{ url_for('login') }}" class="btn btn-outline">Login</a></li>
-    <li><a href="{{ url_for('signup') }}" class="btn btn-filled">Sign Up</a></li>
-  </ul>
+  <div class="nav-brand">
+    <img src="logo.png" alt="Logo" class="nav-logo" />
+    <span class="nav-title">BrainBloom</span>
+  </div>
+
+  <div class="nav-links">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/chat">Chat</a>
+    <a href="/about">About</a>
+  </div>
+
+  <div class="nav-cta-buttons">
+    <a href="/login" class="btn login">Login</a>
+    <a href="/signup" class="btn signup">Sign Up</a>
+  </div>
 </nav>
+
 
   <div class="container">
     <h1 class="title">Ask Bloomie</h1>
