@@ -303,6 +303,19 @@ def get_prompt_history():
     prompt_list = [row['title'] for row in prompts]
     return jsonify(prompt_list)
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+@app.route("/dashboard")
+def dashboard():
+    if 'email' not in session:
+        flash("Please log in first.", "error")
+        return redirect(url_for("login"))
+
+    user_email = session['email']
+    return render_template("dashboard.html", email=user_email)
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)

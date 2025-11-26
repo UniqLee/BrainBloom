@@ -1,0 +1,132 @@
+ :root {
+  --primary-color: #0055cc;
+  --accent-color: #3399ff;
+  --background-color: #ffffff;
+  --nav-bg: var(--primary-color);
+  --white: #ffffff;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar Container */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--nav-bg);
+  color: var(--white);
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo {
+  width: 40px;
+  height: auto;
+}
+
+.nav-title {
+  font-size: 25px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-links a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  font-weight: 700;
+  color: var(--white);
+}
+
+.nav-cta-buttons {
+  display: flex;
+  gap: 12px;
+  margin-right: 20px;
+}
+
+.btn {
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn.signup {
+  background: var(--white);
+  color: var(--nav-bg);
+}
+
+.btn.signup:hover {
+  background: transparent;
+  border: 2px solid var(--white);
+  color: var(--white);
+}
+
+.btn.login {
+  background: transparent;
+  border: 2px solid var(--white);
+  color: var(--white);
+}
+
+.btn.login:hover {
+  background: var(--white);
+  color: var(--nav-bg);
+}
+
+ 
+ .about-container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      font-family: Arial, sans-serif;
+    }
+h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+h2 {
+      margin-top: 30px;
+      color: #34495e;
+    }
+p {
+      line-height: 1.6;
+      color: #555;
+    }
+ul {
+      margin-left: 20px;
+      color: #555;
+    }
+
+.about-image {
+      display: block;
+      max-width: 300px;
+      margin: 20px auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }

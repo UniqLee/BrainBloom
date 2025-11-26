@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About BrainBloom</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="nav-title">BrainBloom</span>
+    </div>
+    <div class="nav-links">
+      <a href="/dashboard">Dashboard</a>
+      <a href="/chat">Chat</a>
+      <a href="/bloomie-ai">Talk to Bloomie</a>
+    </div>
+    <div class="nav-cta-buttons">
+      <a href="/login" class="btn login">Login</a>
+      <a href="/signup" class="btn signup">Sign Up</a>
+    </div>
+  </nav>
+
+  <div class="about-container">
+    <h1>About BrainBloom</h1>
+     <img src="{{ url_for('static', filename='img/bloomie.jpg') }}" alt="BrainBloom Illustration" class="about-image">
+
+
+    <p>BrainBloom is a peer chatroom and AI-powered study assistant designed to make learning interactive, fun, and personalized. Whether you're tackling a tough topic or just want to quiz yourself, BrainBloom has the tools to help you grow.</p>
+
+    <h2>Key Features:</h2>
+    <ul>
+      <li><strong>Peer Chatroom:</strong> Connect and discuss topics with other learners in real-time.</li>
+      <li><strong>AI Study Assistant (Bloomie):</strong> Ask Bloomie for explanations, quizzes, and learning resources tailored to your needs.</li>
+      <li><strong>Topic Tracking:</strong> Save, manage, and revisit all your study topics in one place.</li>
+      <li><strong>Quiz Creation:</strong> Create and take quizzes to test your understanding and retention.</li>
+      <li><strong>Prompt Sharing:</strong> Share study prompts with Bloomie from your chat history for instant AI assistance.</li>
+    </ul>
+
+    <h2>Our Mission:</h2>
+    <p>BrainBloom aims to make learning collaborative and enjoyable. By combining peer interaction with AI guidance, we help learners understand complex topics, stay motivated, and track their progress over time.</p>
+
+    <h2>Get Started:</h2>
+    <p>Sign up today to join the BrainBloom community and take your learning to the next level!</p>
+  </div>
+</body>
+</html>
