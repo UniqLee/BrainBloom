@@ -7,6 +7,24 @@
   <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 </head>
 <body>
+   <nav class="navbar">
+  <div class="nav-brand">
+
+    <span class="nav-title">BrainBloom</span>
+  </div>
+
+  <div class="nav-links">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/chat">Chat</a>
+    <a href="/about">About</a>
+    <a href="/bloomie-ai">Talk to Bloomie</a>
+  </div>
+
+  <div class="nav-cta-buttons">
+    <a href="/login" class="btn login">Login</a>
+    <a href="/signup" class="btn signup">Sign Up</a>
+  </div>
+</nav>
   <div class="container">
     <h1>BrainBloom Peer Chatroom</h1>
     <div id="chat-box" class="chat-box"></div>
@@ -14,6 +32,16 @@
     <form id="chat-form">
       <input type="text" id="chat-input" placeholder="Type a message..." required autocomplete="off">
       <button type="submit">Send</button>
+
+      <button type="button" id="share-prompt">Share Prompt</button>
+
+      <div id="prompt-modal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <span id="close-modal" class="close">&times;</span>
+        <h3>Select a Prompt to Share</h3>
+        <ul id="prompt-list"></ul>
+      </div>
+    </div>
     </form>
   </div>
 
@@ -40,6 +68,75 @@
       chatBox.appendChild(msgDiv);
       chatBox.scrollTop = chatBox.scrollHeight;
     });
+
+
+  const shareBtn1 = document.getElementById('share-prompt');
+
+  shareBtn1.addEventListener('click', () => {
+  const message = input.value.trim();
+  if (!message) {
+    alert("Please type a message to share!");
+    return;
+  }
+
+  // Send message to your Bloomie AI endpoint
+  fetch("/bloomie-ai", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ question: message })
+  })
+  .then(response => response.text())
+  .then(data => {
+    alert("Prompt shared with Bloomie! Check your Bloomie AI chat.");
+    input.value = ""; // optionally clear input
+  })
+  .catch(err => console.error("Error sharing prompt:", err));
+});
+
+const shareBtn = document.getElementById('share-prompt');
+const modal = document.getElementById('prompt-modal');
+const closeModal = document.getElementById('close-modal');
+const promptList = document.getElementById('prompt-list');
+
+shareBtn.addEventListener('click', () => {
+  // Fetch prompt history from server
+  fetch("/get-prompt-history")
+    .then(res => res.json())
+    .then(data => {
+      promptList.innerHTML = ""; // clear old list
+      data.forEach(prompt => {
+        const li = document.createElement('li');
+        li.textContent = prompt;
+        li.addEventListener('click', () => {
+          // When user selects a prompt, send it to Bloomie
+          fetch("/bloomie-ai", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({ question: prompt })
+          })
+          .then(() => {
+            alert("Prompt shared with Bloomie!");
+            modal.style.display = "none";
+          })
+          .catch(err => console.error(err));
+        });
+        promptList.appendChild(li);
+      });
+
+      modal.style.display = "flex"; // show modal
+    })
+    .catch(err => console.error("Error fetching prompt history:", err));
+});
+
+// Close modal
+closeModal.addEventListener('click', () => {
+  modal.style.display = "none";
+});
+window.addEventListener('click', (e) => {
+  if(e.target === modal) modal.style.display = "none";
+});
+
+
   </script>
 </body>
 </html>

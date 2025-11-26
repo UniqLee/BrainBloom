@@ -157,6 +157,7 @@ def view_topics():
     conn = get_db_connection()
     topics = conn.execute("SELECT * FROM topics WHERE user_id = ? ORDER BY created_at DESC", (user_id,)).fetchall()
     conn.close()
+    
     return render_template("topics.html", topics=topics)
 
 @app.route("/add-topic", methods=["GET", "POST"])
@@ -242,13 +243,13 @@ def add_user(email, password_hash, first_name, last_name, education, subject, go
         """, (email, password_hash, first_name, last_name, education, subject, goal))
         conn.commit()
         conn.close()
-        print("User added successfully!")  # ✅ DEBUG LOG
+        print("User added successfully!")  
         return True
     except sqlite3.IntegrityError:
-        print("IntegrityError: Email already exists!")  # ✅ DEBUG LOG
+        print("IntegrityError: Email already exists!") 
         return False
     except Exception as e:
-        print(f"Exception in add_user: {e}")  # ✅ DEBUG LOG
+        print(f"Exception in add_user: {e}")  
         return False
 
 
@@ -285,6 +286,22 @@ def handle_message(data):
         'sender': sender,
         'message': message
     }, broadcast=True)
+
+@app.route("/get-prompt-history")
+def get_prompt_history():
+    user_email = session.get('email')
+    if not user_email:
+        return jsonify([])
+
+    conn = get_db_connection()
+    prompts = conn.execute(
+        "SELECT title FROM topics WHERE user_id = (SELECT id FROM users WHERE email = ?) ORDER BY created_at DESC",
+        (user_email,)
+    ).fetchall()
+    conn.close()
+
+    prompt_list = [row['title'] for row in prompts]
+    return jsonify(prompt_list)
 
 
 if __name__ == '__main__':
