@@ -1,3 +1,6 @@
+import eventlet
+eventlet.monkey_patch()
+
 from flask import Flask, render_template, request, redirect, url_for, flash, g, session, jsonify
 from flask_cors import CORS
 import sqlite3
@@ -7,7 +10,7 @@ import requests
 import time
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_socketio import SocketIO, emit
-import eventlet
+
 
 
 
@@ -17,8 +20,8 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = 'your_secret_key' 
 CORS(app)
-eventlet.monkey_patch()
-socketio = SocketIO(app)
+
+socketio = SocketIO(app,async_mode='eventlet')
 
 def get_db_connection():
     conn = sqlite3.connect('database/brainbloom.db')
@@ -103,7 +106,8 @@ def talk_to_bloomie():
     if request.method == "POST":
         prompt = request.form.get("question")
         context = build_prompt(prompt)
-
+        print(f"Context: {context}")
+        print(f"Prompt: {prompt}")
         api_url = "https://api.shecodes.io/ai/v1/generate"
         api_key = os.getenv("SHECODES_API_KEY")
 
@@ -113,7 +117,7 @@ def talk_to_bloomie():
                 'context': context,
                 'key': api_key
             }, timeout=30)
-
+            print("Inside try")
             if response.status_code == 200:
                 data = response.json()
                 feedback = data.get("answer", "No feedback received.")
