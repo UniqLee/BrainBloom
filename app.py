@@ -10,10 +10,7 @@ import requests
 import time
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_socketio import SocketIO, emit
-
-
-
-
+import markdown
 
 load_dotenv() 
 
@@ -106,8 +103,7 @@ def talk_to_bloomie():
     if request.method == "POST":
         prompt = request.form.get("question")
         context = build_prompt(prompt)
-        print(f"Context: {context}")
-        print(f"Prompt: {prompt}")
+    
         api_url = "https://api.shecodes.io/ai/v1/generate"
         api_key = os.getenv("SHECODES_API_KEY")
 
@@ -117,10 +113,12 @@ def talk_to_bloomie():
                 'context': context,
                 'key': api_key
             }, timeout=30)
-            print("Inside try")
+
             if response.status_code == 200:
                 data = response.json()
+
                 feedback = data.get("answer", "No feedback received.")
+                feedback_formatted= markdown.markdown(feedback)
 
                 conn = get_db_connection()
                 conn.execute(
@@ -131,7 +129,7 @@ def talk_to_bloomie():
                 conn.close()
 
                 chat_history.append({"role": "user", "text": prompt})
-                chat_history.append({"role": "bloomie", "text": feedback})
+                chat_history.append({"role": "bloomie", "text": feedback_formatted})
                 session["chat_history"] = chat_history
 
             else:

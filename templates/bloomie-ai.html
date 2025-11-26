@@ -10,7 +10,7 @@
 <body>
   <nav class="navbar">
   <div class="nav-brand">
-    <!-- <img src="logo.png" alt="Logo" class="nav-logo" /> -->
+
     <span class="nav-title">BrainBloom</span>
   </div>
 
@@ -38,7 +38,7 @@
           {% else %}
             <div class="avatar user-avatar">{{ session.get('email', 'U')[0] | upper }}</div>
           {% endif %}
-          <div class="bubble-text">{{ message.text }}</div>
+          <div class="bubble-text"><p>{{ message.text|safe }}</p></div>
         </div>
       {% endfor %}
     </div>
