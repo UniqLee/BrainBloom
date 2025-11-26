@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard</title>
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-brand">
+    <div class="nav-logo">SP</div>
+    <div class="nav-title">Student Portal</div>
+  </div>
+  <div class="nav-links">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/chat">Chat</a>
+    <a href="/about">About</a>
+  </div>
+</nav>
+
+<main class="main">
+  <aside class="sidebar">
+    <h2>Quick Links</h2>
+    <ul>
+      <li><a href="#">Upcoming Exams</a></li>
+      <li><a href="#">Library</a></li>
+      <li><a href="#">Messages</a></li>
+      <li><a href="#">Settings</a></li>
+    </ul>
+  </aside>
+
+  <section class="content">
+    <div class="welcome-section">
+      <h2>Welcome back, User! </h2>
+      <p>Here's what's happening with your studies today</p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">💾</div>
+        <h3>Saved Prompts</h3>
+        <p>Quick access to your saved AI prompts</p>
+        <div class="card-value">12</div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">📝</div>
+        <h3>Study Notes</h3>
+        <p>Your organized study materials</p>
+        <div class="card-value">24</div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🎴</div>
+        <h3>Flashcards</h3>
+        <p>Review sets for exam preparation</p>
+        <div class="card-value">8</div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🎓</div>
+        <h3>Grade Average</h3>
+        <p>Track how you're doing in your modules/subjects</p>
+        <div class="card-value">81%</div>
+      </div>
+    </div>
+
+    <div class="modules-section">
+      <h2>My Modules</h2>
+      <div class="module-list">
+        <div class="module-item">
+          <div class="module-info">
+            <div class="module-name">Software Engineering</div>
+            <div class="module-code">CSC3002F</div>
+          </div>
+          <div class="module-grade">
+            <div class="grade-bar">
+              <div class="grade-fill" style="width: 88%"></div>
+            </div>
+            <span class="grade-percentage">88%</span>
+            <span class="grade-badge grade-excellent">⭐ Excellent</span>
+          </div>
+        </div>
+
+        <div class="module-item">
+          <div class="module-info">
+            <div class="module-name">Web Development</div>
+            <div class="module-code">CSC3003S</div>
+          </div>
+          <div class="module-grade">
+            <div class="grade-bar">
+              <div class="grade-fill" style="width: 85%"></div>
+            </div>
+            <span class="grade-percentage">85%</span>
+            <span class="grade-badge grade-excellent">⭐ Excellent</span>
+          </div>
+        </div>
+
+        <div class="module-item">
+          <div class="module-info">
+            <div class="module-name">Mobile Application Development</div>
+            <div class="module-code">CSC3005Z</div>
+          </div>
+          <div class="module-grade">
+            <div class="grade-bar">
+              <div class="grade-fill" style="width: 78%"></div>
+            </div>
+            <span class="grade-percentage">78%</span>
+            <span class="grade-badge grade-good">✓ Good</span>
+          </div>
+        </div>
+
+        <div class="module-item">
+          <div class="module-info">
+            <div class="module-name">Database Systems</div>
+            <div class="module-code">CSC3001F</div>
+          </div>
+          <div class="module-grade">
+            <div class="grade-bar">
+              <div class="grade-fill" style="width: 92%"></div>
+            </div>
+            <span class="grade-percentage">92%</span>
+            <span class="grade-badge grade-excellent">⭐ Excellent</span>
+          </div>
+        </div>
+
+        <div class="module-item">
+          <div class="module-info">
+            <div class="module-name">Computer Networks</div>
+            <div class="module-code">CSC3004Z</div>
+          </div>
+          <div class="module-grade">
+            <div class="grade-bar">
+              <div class="grade-fill" style="width: 72%"></div>
+            </div>
+            <span class="grade-percentage">72%</span>
+            <span class="grade-badge grade-average">↑ Keep Going</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>&copy; 2025 BrainBloom | By BrainBloomers</p>
+</footer>
+</body>
+</html>
