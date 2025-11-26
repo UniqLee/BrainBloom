@@ -71,7 +71,7 @@ def login():
         if user and check_password_hash(user['user_password'], password):  
             session['email'] = email  
             flash('Logged in successfully!', 'success')
-            return redirect(url_for('chatroom'))
+            return redirect(url_for('dashboard'))
         else:
             flash("User does not exist!")
 
